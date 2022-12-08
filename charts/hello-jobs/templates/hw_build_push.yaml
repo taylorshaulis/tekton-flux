@@ -1,0 +1,23 @@
+{{- if .Values.hw_build_push.task.enabled }}
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hw-build-push
+spec:
+  steps:
+    - name: ubuntu
+      image: ubuntu
+      script: |
+        #!/usr/bin/env bash
+        echo "Hello from Bash!"
+{{- if .Values.hw_build_push.taskrun.enabled }}
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: hw-build-push
+spec:
+  taskRef:
+    name: hw-build-push
+{{ end }}
+{{ end }}

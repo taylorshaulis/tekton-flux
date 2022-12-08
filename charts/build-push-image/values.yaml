@@ -1,0 +1,13 @@
+clonebuildpush:
+  pipeline:
+    enabled: true
+  pipelinerun:
+    enabled: true
+    repourl: https://github.com/google/docsy-example.git
+
+checkoutlist:
+  pipeline:
+    enabled: false
+  pipelinerun:
+    enabled: false
+    repourl: https://github.com/google/docsy-example.git

@@ -1,0 +1,66 @@
+{{- if .Values.checkoutlist.pipeline.enabled }}
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: checkout-list
+spec:
+  description: | 
+    This pipeline clones a git repo, builds a Docker image with Kaniko and
+    pushes it to a registry
+  params:
+  - name: repo-url
+    type: string
+  - name: cmd
+    type: string
+  workspaces:
+  - name: shared-data
+  tasks:
+  - name: fetch-source
+    taskRef:
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: shared-data
+    params:
+    - name: url
+      value: $(params.repo-url)
+  - name: listdata
+    runAfter: ["fetch-source"]
+    taskRef:
+      name: hellocmd
+    workspaces:
+    - name: data
+      workspace: shared-data
+    params:
+    - name: cmd
+      value: $(params.cmd)
+{{- if .Values.checkoutlist.pipelinerun.enabled }}
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: checkout-list-run
+spec:
+  pipelineRef:
+    name: checkout-list
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
+  workspaces:
+  - name: shared-data
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  params:
+  - name: repo-url
+    value: {{ .Values.checkoutlist.pipelinerun.repourl }}
+  - name: cmd
+    value: |
+        #!/bin/sh
+        ls -alh /data
+{{ end }}
+{{ end }}

@@ -1,0 +1,50 @@
+{{- if .Values.hellocmd.task.enabled }}
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hellocmd
+spec:
+  params:
+    - name: cmd
+      type: string
+  workspaces:
+    - name: data
+      optional: true
+      mountPath: /data
+  steps:
+    - name: cmd
+      image: alpine
+      script: $(params.cmd)
+{{- if .Values.hellocmd.taskrun.enabled }}
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: hellocmd-taskrun
+spec:
+  taskRef:
+    name: hellocmd
+  params:
+    - name: cmd
+      value: |
+        #!/bin/sh
+        echo "Hello World"
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: hellocmd-taskrun-data
+spec:
+  taskRef:
+    name: hellocmd
+  workspaces:
+    - name: data
+      emptyDir: {}
+  params:
+    - name: cmd
+      value: |
+        #!/bin/sh
+        touch /data/test.txt
+        ls -alh /data
+{{ end }}
+{{ end }}

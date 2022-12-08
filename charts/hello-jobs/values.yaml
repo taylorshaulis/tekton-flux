@@ -1,0 +1,23 @@
+helloworld:
+  task:
+    enabled: true
+  taskrun:
+    enabled: true
+
+hw_multi_steps:
+  task:
+    enabled: true
+  taskrun:
+    enabled: true
+
+hw_build_push:
+  task:
+    enabled: false
+  taskrun:
+    enabled: false
+
+hellocmd:
+  task:
+    enabled: true
+  taskrun:
+    enabled: true

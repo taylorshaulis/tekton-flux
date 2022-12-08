@@ -1,0 +1,23 @@
+{{- if .Values.helloworld.task.enabled }}
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hello
+spec:
+  steps:
+    - name: echo
+      image: alpine
+      script: |
+        #!/bin/sh
+        echo "Hello World"
+{{- if .Values.helloworld.taskrun.enabled }}
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: hello-task-run
+spec:
+  taskRef:
+    name: hello
+{{ end }}
+{{ end }}
