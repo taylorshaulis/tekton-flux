@@ -1,0 +1,76 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: chicken
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/taylorshaulis/chicken
+  ref:
+    branch: main
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/charts/  
+    !/tekton/  
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hello-jobs
+  namespace: default
+spec:
+  interval: 3m
+  dependsOn:
+    - name: tektoncd-catalog
+  install:
+    remediation:
+      retries: 5
+  chart:
+    spec:
+      chart: ./tekton/local-flux/hello-jobs
+      sourceRef:
+        kind: GitRepository
+        name: chicken
+        namespace: flux-system
+      interval: 1m
+  values:
+    helloworld:
+      task:
+        enabled: true
+      taskrun:
+        enabled: true
+    hw_multi_steps:
+      task:
+        enabled: false
+      taskrun:
+        enabled: false
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: build-push-image
+  namespace: default
+spec:
+  interval: 3m
+  dependsOn:
+    - name: tektoncd-catalog
+  install:
+    remediation:
+      retries: 5
+  chart:
+    spec:
+      chart: ./tekton/local-flux/build-push-image
+      sourceRef:
+        kind: GitRepository
+        name: chicken
+        namespace: flux-system
+      interval: 1m
+  values:
+    clonebuildpush:
+      pipeline:
+        enabled: true
+      pipelinerun:
+        enabled: true
+        repourl: https://github.com/taylorshaulis/hello-world-daisy-chain.git

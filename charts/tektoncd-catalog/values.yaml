@@ -1,0 +1,7 @@
+gitclone:
+  enabled: true
+  path: ./task/git-clone/0.9/
+
+kaniko:
+  enabled: true
+  path: ./task/kaniko/0.6/

@@ -1,0 +1,16 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: tektoncd-catalog
+  namespace: default
+spec:
+  interval: 1h
+  url: https://github.com/tektoncd/catalog
+  ref:
+    branch: main
+  ignore: |
+    # exclude all
+    /*
+    # basically whitelist tasks
+    !/task/git-clone/0.9/git-clone.yaml
+    !/task/kaniko/0.6/kaniko.yaml
