@@ -12,8 +12,6 @@ spec:
     type: string
   - name: image-reference
     type: string
-  - name: cmd
-    type: string
   workspaces:
   - name: shared-data
   tasks:
@@ -36,16 +34,6 @@ spec:
     params:
     - name: IMAGE
       value: $(params.image-reference)
-  - name: listdata
-    runAfter: ["fetch-source"]
-    taskRef:
-      name: hellocmd
-    workspaces:
-    - name: data
-      workspace: shared-data
-    params:
-    - name: cmd
-      value: $(params.cmd)
 {{- if .Values.clonebuildpush.pipelinerun.enabled }}
 ---
 apiVersion: tekton.dev/v1beta1
@@ -72,9 +60,5 @@ spec:
     value: {{ .Values.clonebuildpush.pipelinerun.repourl }}
   - name: image-reference
     value: docker-registry.default.svc.cluster.local:5000/hwdc:latest
-  - name: cmd
-    value: |
-        #!/bin/sh
-        ls -alh /data
 {{ end }}
 {{ end }}
