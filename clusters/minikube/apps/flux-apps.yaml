@@ -21,7 +21,7 @@ spec:
       retries: 5
   chart:
     spec:
-      chart: ./charts/flux-apps
+      chart: ./
       sourceRef:
         kind: GitRepository
         name: flux-apps
