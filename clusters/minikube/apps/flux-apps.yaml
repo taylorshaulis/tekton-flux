@@ -29,6 +29,7 @@ spec:
       interval: 1m
       valuesFiles:
        - ./charts/flux-apps/values.yaml
+       - ./charts/flux-apps/simple_values.yaml
   # values:
   #   apps:
   #     - name: echoserver
