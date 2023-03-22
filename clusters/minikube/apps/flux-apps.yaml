@@ -28,8 +28,8 @@ spec:
         namespace: flux-system
       interval: 1m
       valuesFiles:
-       - values.yaml
-       - complex_values.yaml
+       - ./charts/flux-apps/values.yaml
+       - ./charts/flux-apps/complex_values.yaml
   # values:
   #   apps:
   #     - name: echoserver
