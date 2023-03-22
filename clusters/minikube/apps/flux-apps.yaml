@@ -27,18 +27,21 @@ spec:
         name: flux-apps
         namespace: flux-system
       interval: 1m
-  values:
-    apps:
-      - name: echoserver
-        gitrepository:
-          url: https://github.com/taylorshaulis/chicken.git
-          branch: main
-        helmrelease:
-          namespace: default
-          chart: charts/echoserver
-      - name: hello
-        helmrepository:
-          url: https://cloudecho.github.io/charts/
-        helmrelease:
-          namespace: default
-          chart: hello
+      valuesFiles:
+       - values.yaml
+       - complex_values.yaml
+  # values:
+  #   apps:
+  #     - name: echoserver
+  #       gitrepository:
+  #         url: https://github.com/taylorshaulis/chicken.git
+  #         branch: main
+  #       helmrelease:
+  #         namespace: default
+  #         chart: charts/echoserver
+  #     - name: hello
+  #       helmrepository:
+  #         url: https://cloudecho.github.io/charts/
+  #       helmrelease:
+  #         namespace: default
+  #         chart: hello
