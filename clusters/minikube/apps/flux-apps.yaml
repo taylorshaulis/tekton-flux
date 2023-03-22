@@ -28,11 +28,4 @@ spec:
         namespace: flux-system
       interval: 1m
   values:
-    apps:
-      - name: echoserver
-        gitrepository:
-          url: https://github.com/taylorshaulis/chicken.git
-          branch: main
-        helmrelease:
-          namespace: default
-          chart: charts/echoserver
+    foo: var
