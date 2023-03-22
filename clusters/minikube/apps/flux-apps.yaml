@@ -26,6 +26,7 @@ spec:
         kind: GitRepository
         name: flux-apps
         namespace: flux-system
+      reconcileStrategy: Revision
       interval: 1m
       valuesFiles:
        - ./charts/flux-apps/values.yaml
