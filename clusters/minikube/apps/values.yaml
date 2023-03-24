@@ -1,0 +1,11 @@
+global:
+  fluxnamespace: flux-system
+  helmrepository:
+    interval: 1h
+  helmrelease:
+    interval: 1m
+  gitrepository:
+    interval: 1h
+    branch: master
+  kustomization:
+    interval: 1m
