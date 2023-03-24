@@ -48,3 +48,4 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: flux-apps-values-configmap
+      optional: true
