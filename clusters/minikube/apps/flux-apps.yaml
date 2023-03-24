@@ -18,9 +18,13 @@ data:
   values.yaml: |-
     apps:
       - name: hello3
+        helmrepository:
+          url: https://cloudecho.github.io/charts/
         helmrelease:
+          namespace: default
+          chart: hello
           values: |
-              fullnameOverride: hello3-inlinevalue
+              fullnameOverride: hello3-overide-yolo
 
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
