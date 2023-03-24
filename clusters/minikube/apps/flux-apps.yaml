@@ -48,3 +48,7 @@ spec:
       valuesFiles:
        - values.yaml
        - simple_values.yaml
+  valuesFrom:
+    - kind: ConfigMap
+      name: flux-apps-values-configmap
+      optional: true
