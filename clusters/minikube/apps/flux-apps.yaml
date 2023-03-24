@@ -30,4 +30,4 @@ spec:
       interval: 1m
       valuesFiles:
        - values.yaml
-       - simple_values.yaml
+      #  - simple_values.yaml
