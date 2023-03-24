@@ -29,5 +29,5 @@ spec:
       reconcileStrategy: Revision
       interval: 1m
       valuesFiles:
-       - values.yaml
+      #  - values.yaml
       #  - simple_values.yaml
