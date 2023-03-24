@@ -9,25 +9,25 @@ spec:
   ref:
     branch: main
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: flux-apps
-  namespace: flux-system
-spec:
-  interval: 3m
-  install:
-    remediation:
-      retries: 5
-  chart:
-    spec:
-      chart: ./
-      sourceRef:
-        kind: GitRepository
-        name: flux-apps
-        namespace: flux-system
-      reconcileStrategy: Revision
-      interval: 1m
-      valuesFiles:
-       - values.yaml
-       - simple_values.yaml
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: flux-apps
+#   namespace: flux-system
+# spec:
+#   interval: 3m
+#   install:
+#     remediation:
+#       retries: 5
+#   chart:
+#     spec:
+#       chart: ./
+#       sourceRef:
+#         kind: GitRepository
+#         name: flux-apps
+#         namespace: flux-system
+#       reconcileStrategy: Revision
+#       interval: 1m
+#       valuesFiles:
+#        - values.yaml
+#        - simple_values.yaml
