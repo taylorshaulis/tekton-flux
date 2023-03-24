@@ -28,6 +28,6 @@ spec:
         namespace: flux-system
       reconcileStrategy: Revision
       interval: 1m
-      valuesFiles:
+      # valuesFiles:
       #  - values.yaml
       #  - simple_values.yaml
