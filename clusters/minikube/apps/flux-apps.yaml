@@ -25,7 +25,6 @@ data:
           chart: hello
           values: |
               fullnameOverride: hello3-overide-yolo
-
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -49,7 +48,3 @@ spec:
       valuesFiles:
        - values.yaml
        - simple_values.yaml
-  valuesFrom:
-    - kind: ConfigMap
-      name: flux-apps-values-configmap
-      optional: true
