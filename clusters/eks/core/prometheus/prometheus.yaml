@@ -1,0 +1,31 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: prometheus
+  namespace: default
+spec:
+  interval: 1h
+  sourceRef:
+    kind: GitRepository
+    name: flux2
+    namespace: flux-system
+  path: ./manifests/monitoring/kube-prometheus-stack
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: monitoring-config
+  namespace: default
+spec:
+  dependsOn:
+    - name: prometheus
+  interval: 1h
+  sourceRef:
+    kind: GitRepository
+    name: flux2
+    namespace: flux-system
+  path: ./manifests/monitoring/monitoring-config
+  prune: true
+  wait: true
